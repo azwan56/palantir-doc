@@ -1,0 +1,20 @@
+# macOS & IDE
+.DS_Store
+.AppleDouble
+.LSOverride
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Web app dependencies & build artifacts
+app/node_modules/
+app/dist/
+app/*.tsbuildinfo
+*.log
+.env
+.env.*

@@ -1,0 +1,474 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+:root {
+  color-scheme: light dark;
+
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+  }
+  &:has(> head > meta[name="color-scheme"][content="light"]) {
+    color-scheme: light;
+  }
+
+  /* Raw color tokens: Palantir Blueprint / Foundry operational palette */
+  --bg-canvas-light: #f6f8fb;
+  --bg-canvas-dark: #0b0f17;
+  --bg-surface-light: #ffffff;
+  --bg-surface-dark: #111824;
+  --bg-elevated-light: #edf1f7;
+  --bg-elevated-dark: #182233;
+  --bg-code-light: #0f172a;
+  --bg-code-dark: #070b12;
+
+  --text-primary-light: #101623;
+  --text-primary-dark: #eef2f8;
+  --text-secondary-light: #475569;
+  --text-secondary-dark: #9fb0c7;
+  --text-muted-light: #64748b;
+  --text-muted-dark: #7d90aa;
+
+  --border-subtle-light: #dbe3ee;
+  --border-subtle-dark: #253247;
+  --border-strong-light: #94a3b8;
+  --border-strong-dark: #475b78;
+
+  /* High-contrast cobalt/cyan accent meeting >=4.5:1 on both surfaces */
+  --accent-light: #1d4ed8;
+  --accent-dark: #60a5fa;
+  --accent-soft-light: #dbeafe;
+  --accent-soft-dark: #172a4a;
+  --accent-text-light: #ffffff;
+  --accent-text-dark: #071224;
+
+  --success-light: #047857;
+  --success-dark: #34d399;
+  --success-soft-light: #ecfdf5;
+  --success-soft-dark: #0d2b23;
+
+  --warning-light: #b45309;
+  --warning-dark: #fbbf24;
+  --warning-soft-light: #fffbeb;
+  --warning-soft-dark: #2d200a;
+
+  --danger-light: #be123c;
+  --danger-dark: #fb7185;
+  --danger-soft-light: #fff1f2;
+  --danger-soft-dark: #32101a;
+
+  /* Semantic tokens with baseline fallback + light-dark() enhancement */
+  --bg-canvas: var(--bg-canvas-light);
+  --bg-surface: var(--bg-surface-light);
+  --bg-elevated: var(--bg-elevated-light);
+  --bg-code: var(--bg-code-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-muted: var(--text-muted-light);
+  --border-subtle: var(--border-subtle-light);
+  --border-strong: var(--border-strong-light);
+  --accent: var(--accent-light);
+  --accent-soft: var(--accent-soft-light);
+  --accent-text: var(--accent-text-light);
+  --success: var(--success-light);
+  --success-soft: var(--success-soft-light);
+  --warning: var(--warning-light);
+  --warning-soft: var(--warning-soft-light);
+  --danger: var(--danger-light);
+  --danger-soft: var(--danger-soft-light);
+  --scrollbar-track: #e9eef5;
+  --scrollbar-thumb: #64748b;
+
+  @media (prefers-color-scheme: dark) {
+    --bg-canvas: var(--bg-canvas-dark);
+    --bg-surface: var(--bg-surface-dark);
+    --bg-elevated: var(--bg-elevated-dark);
+    --bg-code: var(--bg-code-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --text-muted: var(--text-muted-dark);
+    --border-subtle: var(--border-subtle-dark);
+    --border-strong: var(--border-strong-dark);
+    --accent: var(--accent-dark);
+    --accent-soft: var(--accent-soft-dark);
+    --accent-text: var(--accent-text-dark);
+    --success: var(--success-dark);
+    --success-soft: var(--success-soft-dark);
+    --warning: var(--warning-dark);
+    --warning-soft: var(--warning-soft-dark);
+    --danger: var(--danger-dark);
+    --danger-soft: var(--danger-soft-dark);
+    --scrollbar-track: #141c2b;
+    --scrollbar-thumb: #64748b;
+  }
+
+  @supports (color: light-dark(white, black)) {
+    --bg-canvas: light-dark(var(--bg-canvas-light), var(--bg-canvas-dark));
+    --bg-surface: light-dark(var(--bg-surface-light), var(--bg-surface-dark));
+    --bg-elevated: light-dark(var(--bg-elevated-light), var(--bg-elevated-dark));
+    --bg-code: light-dark(var(--bg-code-light), var(--bg-code-dark));
+    --text-primary: light-dark(var(--text-primary-light), var(--text-primary-dark));
+    --text-secondary: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
+    --text-muted: light-dark(var(--text-muted-light), var(--text-muted-dark));
+    --border-subtle: light-dark(var(--border-subtle-light), var(--border-subtle-dark));
+    --border-strong: light-dark(var(--border-strong-light), var(--border-strong-dark));
+    --accent: light-dark(var(--accent-light), var(--accent-dark));
+    --accent-soft: light-dark(var(--accent-soft-light), var(--accent-soft-dark));
+    --accent-text: light-dark(var(--accent-text-light), var(--accent-text-dark));
+    --success: light-dark(var(--success-light), var(--success-dark));
+    --success-soft: light-dark(var(--success-soft-light), var(--success-soft-dark));
+    --warning: light-dark(var(--warning-light), var(--warning-dark));
+    --warning-soft: light-dark(var(--warning-soft-light), var(--warning-soft-dark));
+    --danger: light-dark(var(--danger-light), var(--danger-dark));
+    --danger-soft: light-dark(var(--danger-soft-light), var(--danger-soft-dark));
+    --scrollbar-track: light-dark(#e9eef5, #141c2b);
+    --scrollbar-thumb: light-dark(#64748b, #6f84a3);
+  }
+
+  accent-color: var(--accent);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
+html,
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-block-size: 100dvb;
+  margin: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible focus rings */
+:where(a:any-link, button, input, select, textarea, summary, [tabindex="0"], [role="tab"]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Visually hidden + skip link */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.skip-link:focus-visible {
+  position: fixed;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  z-index: 100;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Dark mode toggle dual-icon branching without JS dependency */
+.theme-toggle-btn .icon-when-dark {
+  display: none;
+}
+.theme-toggle-btn .icon-when-light {
+  display: inline-flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle-btn .icon-when-dark {
+    display: inline-flex;
+  }
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle-btn .icon-when-light {
+    display: none;
+  }
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-btn .icon-when-dark {
+  display: inline-flex;
+}
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-btn .icon-when-light {
+  display: none;
+}
+
+/* Native <dialog> modal scroll lock & backdrop */
+dialog {
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 0;
+}
+
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgb(6 10 18 / 0.65);
+  backdrop-filter: blur(4px);
+}
+
+/* Scrollable nested panels */
+.scroll-panel {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Accessible Tabs pattern per modern-web-guidance */
+.tabs-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: inline proximity;
+  border-block-end: 1px solid var(--border-subtle);
+  gap: 0.25rem;
+}
+
+.tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  position: relative;
+  flex: none;
+  scroll-snap-align: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-block-size: 2.75rem;
+  padding-inline: 0.9rem;
+  padding-block: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn[aria-selected="true"] {
+  color: var(--accent);
+}
+
+/* Shape underline via pseudo-element border-block-end for WCAG 1.4.1 & Forced Colors */
+.tab-btn[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.25rem;
+  inset-block-end: 0;
+  border-block-end: 3px solid var(--accent);
+}
+
+/* Keep tabpanels borderless/paddingless so hidden="until-found" does not paint an empty strip */
+[role="tabpanel"] {
+  min-inline-size: 0;
+}
+
+/* Responsive table wrapper */
+.table-scroll-wrap {
+  overflow-x: auto;
+  max-inline-size: 100%;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  background: var(--bg-surface);
+}
+
+.doc-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: start;
+}
+
+.doc-table caption {
+  padding-inline: 1rem;
+  padding-block: 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: start;
+  border-block-end: 1px solid var(--border-subtle);
+}
+
+.doc-table th,
+.doc-table td {
+  padding-inline: 0.9rem;
+  padding-block: 0.65rem;
+  border-block-end: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+.doc-table thead th {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.doc-table tbody tr:last-child td,
+.doc-table tbody tr:last-child th {
+  border-block-end: 0;
+}
+
+/* Dark code surface independent of page scheme */
+.code-surface {
+  color-scheme: dark;
+  background: var(--bg-code);
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+}
+
+/* Subtle tactical blueprint grid background for hero/sandbox */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--border-subtle) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border-subtle) 45%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Markdown Prose Styling inside Doc Reader */
+.md-prose {
+  min-inline-size: 0;
+  font-size: 0.96rem;
+  line-height: 1.72;
+  color: var(--text-primary);
+}
+
+.md-prose h1 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-block: 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+.md-prose h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-block: 2rem 0.75rem;
+  padding-block-end: 0.4rem;
+  border-block-end: 1px solid var(--border-subtle);
+  scroll-margin-block-start: 5rem;
+}
+
+.md-prose h3 {
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-block: 1.5rem 0.5rem;
+  scroll-margin-block-start: 5rem;
+}
+
+.md-prose h4 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-block: 1.25rem 0.4rem;
+}
+
+.md-prose p {
+  margin-block: 0.85rem;
+}
+
+.md-prose ul,
+.md-prose ol {
+  margin-block: 0.75rem;
+  padding-inline-start: 1.5rem;
+}
+
+.md-prose ul {
+  list-style-type: disc;
+}
+
+.md-prose ol {
+  list-style-type: decimal;
+}
+
+.md-prose li {
+  margin-block: 0.35rem;
+}
+
+.md-prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  padding-inline: 0.35em;
+  padding-block: 0.12em;
+  border-radius: 0.3rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  overflow-wrap: anywhere;
+}
+
+.md-prose blockquote {
+  margin-block: 1rem;
+  margin-inline: 0;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  border-inline-start: 3px solid var(--accent);
+  background: var(--bg-elevated);
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: var(--text-secondary);
+}
+
+.md-prose hr {
+  border: 0;
+  border-block-start: 1px solid var(--border-subtle);
+  margin-block: 2rem;
+}
+
+@media (forced-colors: active) {
+  .tab-btn[aria-selected="true"]::after {
+    border-block-end-color: Highlight;
+  }
+  .card-surface,
+  dialog {
+    border: 1px solid CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
