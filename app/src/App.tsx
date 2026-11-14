@@ -9,6 +9,7 @@ import {
   Database,
   FolderTree,
   GraduationCap,
+  House,
   Layers,
   Play,
   Search,
@@ -218,14 +219,23 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2">
+              <a
+                href="https://www.vanpower.net/"
+                className="inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-2.5 text-xs font-medium text-[var(--text-secondary)] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] sm:px-3"
+              >
+                <House className="size-3.5 text-[var(--accent)]" aria-hidden="true" />
+                <span>返回主页</span>
+              </a>
+
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
-                className="inline-flex min-h-[40px] items-center gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] px-3 text-xs text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--text-primary)]"
+                className="inline-flex min-h-[40px] items-center gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] px-2.5 text-xs text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--text-primary)] sm:px-3"
                 aria-label="打开全局搜索（快捷键 Command+K 或 Ctrl+K）"
               >
                 <Search className="size-3.5 text-[var(--accent)]" aria-hidden="true" />
-                <span>搜文档 / 术语</span>
+                <span className="sm:hidden">搜索</span>
+                <span className="hidden sm:inline">搜文档 / 术语</span>
                 <kbd className="hidden rounded border border-[var(--border-strong)]/40 bg-[var(--bg-surface)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--text-muted)] sm:inline-block">
                   ⌘K
                 </kbd>
@@ -558,8 +568,22 @@ export default function App() {
         {/* Footer */}
         <footer className="mt-12 border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] py-6 text-xs text-[var(--text-muted)]">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 sm:px-6">
-            <div>
-              本地文档源：<code>/Users/Alex/palantir-docs/foundry/</code>（共 {docsIndex.totalDocs} 篇 · 已掌握 {readDocs.length} 篇）
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span>
+                © {new Date().getFullYear()}{' '}
+                <a
+                  href="https://www.vanpower.net/"
+                  className="font-semibold text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)] hover:underline"
+                >
+                  www.vanpower.net
+                </a>
+              </span>
+              <span aria-hidden="true" className="text-[var(--border-strong)]">
+                ·
+              </span>
+              <span>
+                共收录 {docsIndex.totalDocs} 篇文档 · 已掌握 {readDocs.length} 篇
+              </span>
             </div>
             <div className="flex flex-wrap items-center gap-4">
               <button
